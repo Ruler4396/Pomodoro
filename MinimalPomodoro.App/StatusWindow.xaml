@@ -1,0 +1,68 @@
+<Window x:Class="MinimalPomodoro.App.StatusWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="番茄钟"
+        Icon="Assets/app.ico"
+        Width="306"
+        SizeToContent="Height"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+    <Border Background="{StaticResource AppBackgroundBrush}"
+            BorderBrush="{StaticResource BorderBrushSoft}"
+            BorderThickness="1"
+            CornerRadius="14"
+            MouseLeftButtonDown="Chrome_MouseLeftButtonDown">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Margin="14,0">
+                <Button x:Name="CloseButton"
+                        Style="{StaticResource MacCloseButtonStyle}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Click="CloseButton_Click" />
+                <TextBlock Text="番茄钟"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="12"
+                           Foreground="{StaticResource TextSecondaryBrush}" />
+            </Grid>
+
+        <Border Margin="14"
+                Grid.Row="1"
+                Padding="18,16,18,16"
+                Background="{StaticResource CardBackgroundBrush}"
+                BorderBrush="{StaticResource BorderBrushSoft}"
+                BorderThickness="1"
+                CornerRadius="14">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="12" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="PhaseText" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" />
+                <TextBlock x:Name="RemainingText" Grid.Row="1" FontSize="44" FontWeight="Light" Margin="0,0,0,0" Foreground="{StaticResource TextPrimaryBrush}" />
+                <TextBlock x:Name="CompletedText" Grid.Row="2" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,0" />
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="14" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="PrimaryButton" IsDefault="True" MinWidth="104" Click="PrimaryButton_Click" />
+                    <Button x:Name="TopmostButton" Grid.Column="2" Content="置顶" Click="TopmostButton_Click" />
+                </Grid>
+            </Grid>
+        </Border>
+        </Grid>
+    </Border>
+</Window>
