@@ -11,6 +11,15 @@
         AllowsTransparency="True"
         Background="Transparent">
     <Grid Margin="14">
+    <Border CornerRadius="18"
+            Background="#FFFFFF"
+            Opacity="0.45"
+            Margin="0,5,0,-1"
+            IsHitTestVisible="False">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="24" ShadowDepth="5" Direction="270" Opacity="0.20" Color="#1F2937" />
+        </Border.Effect>
+    </Border>
     <Border Style="{StaticResource WindowChromeBorderStyle}"
             MouseLeftButtonDown="Chrome_MouseLeftButtonDown">
         <Grid ClipToBounds="True">
@@ -37,8 +46,20 @@
 
         <Border Margin="14,13,14,14"
                 Grid.Row="1"
-                Padding="18,16,18,16"
-                Style="{StaticResource CardBorderStyle}">
+                Padding="0"
+                Background="Transparent"
+                BorderThickness="0">
+            <Grid>
+                <Border CornerRadius="14"
+                        Background="#FFFFFF"
+                        Margin="0,2,0,-1"
+                        IsHitTestVisible="False">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="12" ShadowDepth="2" Direction="270" Opacity="0.08" Color="#000000" />
+                    </Border.Effect>
+                </Border>
+                <Border Style="{StaticResource CardBorderStyle}"
+                        Padding="18,16,18,16">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -59,6 +80,8 @@
                     <Button x:Name="PrimaryButton" IsDefault="True" MinWidth="104" Click="PrimaryButton_Click" />
                     <Button x:Name="TopmostButton" Grid.Column="2" Content="置顶" Click="TopmostButton_Click" />
                 </Grid>
+            </Grid>
+                </Border>
             </Grid>
         </Border>
         </Grid>

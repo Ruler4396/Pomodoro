@@ -13,6 +13,15 @@
         AllowsTransparency="True"
         Background="Transparent">
     <Grid Margin="14">
+    <Border CornerRadius="18"
+            Background="#FFFFFF"
+            Opacity="0.45"
+            Margin="0,5,0,-1"
+            IsHitTestVisible="False">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="24" ShadowDepth="5" Direction="270" Opacity="0.20" Color="#1F2937" />
+        </Border.Effect>
+    </Border>
     <Border Style="{StaticResource WindowChromeBorderStyle}"
             MouseLeftButtonDown="Chrome_MouseLeftButtonDown">
     <Grid ClipToBounds="True">
@@ -47,9 +56,16 @@
 
         <ScrollViewer Grid.Row="2" Margin="18,0,18,10" VerticalScrollBarVisibility="Auto">
             <StackPanel>
-                <Border Style="{StaticResource CardBorderStyle}"
-                        Padding="0"
-                        Margin="0,0,0,14">
+                <Grid Margin="0,0,0,14">
+                <Border CornerRadius="14"
+                        Background="#FFFFFF"
+                        Margin="0,2,0,-1"
+                        IsHitTestVisible="False">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="12" ShadowDepth="2" Direction="270" Opacity="0.08" Color="#000000" />
+                    </Border.Effect>
+                </Border>
+                <Border Style="{StaticResource CardBorderStyle}" Padding="0">
                     <StackPanel>
                         <Grid Margin="18,14">
                             <Grid.ColumnDefinitions>
@@ -103,9 +119,18 @@
                         </Grid>
                     </StackPanel>
                 </Border>
+                </Grid>
 
-                <Border Style="{StaticResource CardBorderStyle}"
-                        Padding="0">
+                <Grid>
+                <Border CornerRadius="14"
+                        Background="#FFFFFF"
+                        Margin="0,2,0,-1"
+                        IsHitTestVisible="False">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="12" ShadowDepth="2" Direction="270" Opacity="0.08" Color="#000000" />
+                    </Border.Effect>
+                </Border>
+                <Border Style="{StaticResource CardBorderStyle}" Padding="0">
                     <StackPanel>
                         <Grid Margin="18,14">
                             <Grid.ColumnDefinitions>
@@ -134,6 +159,7 @@
                         </Grid>
                     </StackPanel>
                 </Border>
+                </Grid>
             </StackPanel>
         </ScrollViewer>
 
