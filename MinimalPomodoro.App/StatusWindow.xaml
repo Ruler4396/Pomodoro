@@ -3,44 +3,42 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="番茄钟"
         Icon="Assets/app.ico"
-        Width="306"
+        Width="334"
         SizeToContent="Height"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent">
-    <Border Background="{StaticResource AppBackgroundBrush}"
-            BorderBrush="{StaticResource BorderBrushSoft}"
-            BorderThickness="1"
-            CornerRadius="14"
+    <Grid Margin="14">
+    <Border Style="{StaticResource WindowChromeBorderStyle}"
             MouseLeftButtonDown="Chrome_MouseLeftButtonDown">
-        <Grid>
+        <Grid ClipToBounds="True">
             <Grid.RowDefinitions>
-                <RowDefinition Height="32" />
+                <RowDefinition Height="34" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Grid Margin="14,0">
+            <Border Grid.Row="0"
+                    Background="{StaticResource TitleBarBrush}"
+                    BorderBrush="#E7EBF1"
+                    BorderThickness="0,0,0,1"
+                    CornerRadius="18,18,0,0" />
+
+            <Grid Grid.Row="0" Margin="16,0">
                 <Button x:Name="CloseButton"
                         Style="{StaticResource MacCloseButtonStyle}"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Click="CloseButton_Click" />
                 <TextBlock Text="番茄钟"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontSize="12"
-                           Foreground="{StaticResource TextSecondaryBrush}" />
+                           Style="{StaticResource TitleBarTextStyle}" />
             </Grid>
 
-        <Border Margin="14"
+        <Border Margin="14,13,14,14"
                 Grid.Row="1"
                 Padding="18,16,18,16"
-                Background="{StaticResource CardBackgroundBrush}"
-                BorderBrush="{StaticResource BorderBrushSoft}"
-                BorderThickness="1"
-                CornerRadius="14">
+                Style="{StaticResource CardBorderStyle}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -65,4 +63,5 @@
         </Border>
         </Grid>
     </Border>
+    </Grid>
 </Window>

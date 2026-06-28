@@ -3,16 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
-        <SolidColorBrush x:Key="AppBackgroundBrush" Color="#F5F6FA" />
+        <SolidColorBrush x:Key="AppBackgroundBrush" Color="#F2F4F8" />
         <SolidColorBrush x:Key="CardBackgroundBrush" Color="#FFFFFF" />
         <SolidColorBrush x:Key="SubtleBackgroundBrush" Color="#F8F9FC" />
         <SolidColorBrush x:Key="TextPrimaryBrush" Color="#1F2328" />
         <SolidColorBrush x:Key="TextSecondaryBrush" Color="#5F6673" />
-        <SolidColorBrush x:Key="BorderBrushSoft" Color="#E1E5EC" />
+        <SolidColorBrush x:Key="BorderBrushSoft" Color="#DCE2EA" />
+        <SolidColorBrush x:Key="BorderBrushSubtle" Color="#EEF1F5" />
         <SolidColorBrush x:Key="AccentBrush" Color="#E8402E" />
         <SolidColorBrush x:Key="AccentHoverBrush" Color="#C92F22" />
-        <SolidColorBrush x:Key="CloseButtonBrush" Color="#FF5F57" />
-        <SolidColorBrush x:Key="CloseButtonHoverBrush" Color="#E64B43" />
+        <SolidColorBrush x:Key="CloseButtonBrush" Color="#FF6159" />
+        <SolidColorBrush x:Key="CloseButtonHoverBrush" Color="#FF756E" />
+        <LinearGradientBrush x:Key="WindowSurfaceBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FAFBFE" Offset="0" />
+            <GradientStop Color="#F1F4F9" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="TitleBarBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FBFCFF" Offset="0" />
+            <GradientStop Color="#EEF2F7" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="CardSurfaceBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFFFFF" Offset="0" />
+            <GradientStop Color="#FDFEFF" Offset="0.56" />
+            <GradientStop Color="#F7F9FC" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="PrimaryButtonBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#F15A47" Offset="0" />
+            <GradientStop Color="#E23D2B" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="PrimaryButtonHoverBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#F36A59" Offset="0" />
+            <GradientStop Color="#D93224" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="NeutralButtonBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFFFFF" Offset="0" />
+            <GradientStop Color="#F6F8FB" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="NeutralButtonHoverBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFFFFF" Offset="0" />
+            <GradientStop Color="#EEF2F7" Offset="1" />
+        </LinearGradientBrush>
 
         <Style TargetType="Window">
             <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI, Microsoft YaHei UI" />
@@ -28,8 +58,8 @@
             <Setter Property="Padding" Value="18,0" />
             <Setter Property="FontSize" Value="13" />
             <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
-            <Setter Property="Background" Value="#FFFFFF" />
-            <Setter Property="BorderBrush" Value="#CBD1DB" />
+            <Setter Property="Background" Value="{StaticResource NeutralButtonBrush}" />
+            <Setter Property="BorderBrush" Value="#CFD6E1" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Template">
@@ -39,23 +69,33 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="6">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"
-                                              RecognizesAccessKey="True" />
+                                CornerRadius="8"
+                                SnapsToDevicePixels="True">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="8" ShadowDepth="1" Direction="270" Opacity="0.08" Color="#000000" />
+                            </Border.Effect>
+                            <Grid>
+                                <Border CornerRadius="7"
+                                        BorderBrush="#80FFFFFF"
+                                        BorderThickness="1,1,1,0"
+                                        Margin="1" />
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True" />
+                            </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="#F7F8FB" />
-                                <Setter TargetName="Root" Property="BorderBrush" Value="#B9C1CE" />
+                                <Setter TargetName="Root" Property="Background" Value="{StaticResource NeutralButtonHoverBrush}" />
+                                <Setter TargetName="Root" Property="BorderBrush" Value="#B7C0CE" />
                                 <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="#EEF1F6" />
+                                <Setter TargetName="Root" Property="Background" Value="#E8EDF4" />
                             </Trigger>
                             <Trigger Property="IsDefault" Value="True">
-                                <Setter Property="Background" Value="{StaticResource AccentBrush}" />
-                                <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
+                                <Setter Property="Background" Value="{StaticResource PrimaryButtonBrush}" />
+                                <Setter Property="BorderBrush" Value="#DC4A38" />
                                 <Setter Property="Foreground" Value="#FFFFFF" />
                             </Trigger>
                             <MultiTrigger>
@@ -63,8 +103,8 @@
                                     <Condition Property="IsDefault" Value="True" />
                                     <Condition Property="IsMouseOver" Value="True" />
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource AccentHoverBrush}" />
-                                <Setter Property="BorderBrush" Value="{StaticResource AccentHoverBrush}" />
+                                <Setter Property="Background" Value="{StaticResource PrimaryButtonHoverBrush}" />
+                                <Setter Property="BorderBrush" Value="#D23A2C" />
                                 <Setter Property="Foreground" Value="#FFFFFF" />
                             </MultiTrigger>
                         </ControlTemplate.Triggers>
@@ -81,8 +121,8 @@
             <Setter Property="TextAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Background" Value="#FFFFFF" />
-            <Setter Property="BorderBrush" Value="#CBD1DB" />
+            <Setter Property="Background" Value="#FCFDFF" />
+            <Setter Property="BorderBrush" Value="#CBD3DF" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -91,8 +131,11 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="7"
+                                CornerRadius="8"
                                 SnapsToDevicePixels="True">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Direction="270" Opacity="0.05" Color="#000000" />
+                            </Border.Effect>
                             <Grid>
                                 <ScrollViewer x:Name="PART_ContentHost"
                                               Margin="{TemplateBinding Padding}"
@@ -117,42 +160,79 @@
         </Style>
 
         <Style x:Key="MacCloseButtonStyle" TargetType="Button">
-            <Setter Property="Width" Value="13" />
-            <Setter Property="Height" Value="13" />
-            <Setter Property="MinWidth" Value="13" />
-            <Setter Property="MinHeight" Value="13" />
+            <Setter Property="Width" Value="14" />
+            <Setter Property="Height" Value="14" />
+            <Setter Property="MinWidth" Value="14" />
+            <Setter Property="MinHeight" Value="14" />
             <Setter Property="Padding" Value="0" />
             <Setter Property="Background" Value="{StaticResource CloseButtonBrush}" />
-            <Setter Property="BorderBrush" Value="#E34D46" />
+            <Setter Property="BorderBrush" Value="#E24D46" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="ToolTip" Value="关闭" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Ellipse Fill="#22000000" Margin="0,1,0,-1" />
                             <Ellipse x:Name="Circle"
-                                     Fill="{TemplateBinding Background}"
                                      Stroke="{TemplateBinding BorderBrush}"
-                                     StrokeThickness="{TemplateBinding BorderThickness}" />
-                            <Path x:Name="Cross"
-                                  Data="M 4 4 L 9 9 M 9 4 L 4 9"
-                                  Stroke="#6E1F1B"
-                                  StrokeThickness="1.2"
-                                  StrokeStartLineCap="Round"
-                                  StrokeEndLineCap="Round"
-                                  Opacity="0" />
+                                     StrokeThickness="{TemplateBinding BorderThickness}">
+                                <Ellipse.Fill>
+                                    <RadialGradientBrush Center="0.35,0.25" GradientOrigin="0.3,0.2" RadiusX="0.85" RadiusY="0.9">
+                                        <GradientStop Color="#FFFF918B" Offset="0" />
+                                        <GradientStop Color="#FFFF6159" Offset="0.5" />
+                                        <GradientStop Color="#FFE64B43" Offset="1" />
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse IsHitTestVisible="False"
+                                     Margin="3,2,3,7"
+                                     Opacity="0.38"
+                                     Fill="#AAFFFFFF" />
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Circle" Property="Fill" Value="{StaticResource CloseButtonHoverBrush}" />
-                                <Setter TargetName="Cross" Property="Opacity" Value="1" />
+                                <Setter Property="BorderBrush" Value="#D94139" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Circle" Property="Fill" Value="#D94139" />
+                                <Setter Property="Opacity" Value="0.78" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="WindowChromeBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource WindowSurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="#C9D0DB" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="18" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="28" ShadowDepth="8" Direction="270" Opacity="0.22" Color="#1F2937" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TitleBarTextStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#656C78" />
+        </Style>
+
+        <Style x:Key="CardBorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource CardSurfaceBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrushSubtle}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="14" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="14" ShadowDepth="2" Direction="270" Opacity="0.07" Color="#000000" />
                 </Setter.Value>
             </Setter>
         </Style>

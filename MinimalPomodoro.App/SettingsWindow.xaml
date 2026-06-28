@@ -3,21 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="设置"
         Icon="Assets/app.ico"
-        Width="520"
-        Height="548"
-        MinWidth="520"
-        MinHeight="548"
+        Width="548"
+        Height="576"
+        MinWidth="548"
+        MinHeight="576"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent">
-    <Border Background="{StaticResource AppBackgroundBrush}"
-            BorderBrush="{StaticResource BorderBrushSoft}"
-            BorderThickness="1"
-            CornerRadius="14"
+    <Grid Margin="14">
+    <Border Style="{StaticResource WindowChromeBorderStyle}"
             MouseLeftButtonDown="Chrome_MouseLeftButtonDown">
-    <Grid>
+    <Grid ClipToBounds="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -25,17 +23,21 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid Margin="16,0" Height="34">
+        <Border Grid.Row="0"
+                Height="34"
+                Background="{StaticResource TitleBarBrush}"
+                BorderBrush="#E7EBF1"
+                BorderThickness="0,0,0,1"
+                CornerRadius="18,18,0,0" />
+
+        <Grid Grid.Row="0" Margin="16,0" Height="34">
             <Button x:Name="CloseButton"
                     Style="{StaticResource MacCloseButtonStyle}"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Click="CloseButton_Click" />
             <TextBlock Text="设置"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       FontSize="12"
-                       Foreground="{StaticResource TextSecondaryBrush}" />
+                       Style="{StaticResource TitleBarTextStyle}" />
         </Grid>
 
         <StackPanel Grid.Row="1" Margin="26,8,26,12">
@@ -45,10 +47,7 @@
 
         <ScrollViewer Grid.Row="2" Margin="18,0,18,10" VerticalScrollBarVisibility="Auto">
             <StackPanel>
-                <Border Background="{StaticResource CardBackgroundBrush}"
-                        BorderBrush="{StaticResource BorderBrushSoft}"
-                        BorderThickness="1"
-                        CornerRadius="12"
+                <Border Style="{StaticResource CardBorderStyle}"
                         Padding="0"
                         Margin="0,0,0,14">
                     <StackPanel>
@@ -67,7 +66,7 @@
                             </DockPanel>
                         </Grid>
 
-                        <Border Height="1" Background="{StaticResource BorderBrushSoft}" Margin="18,0" />
+                        <Border Height="1" Background="{StaticResource BorderBrushSubtle}" Margin="18,0" />
 
                         <Grid Margin="18,14">
                             <Grid.ColumnDefinitions>
@@ -84,7 +83,7 @@
                             </DockPanel>
                         </Grid>
 
-                        <Border Height="1" Background="{StaticResource BorderBrushSoft}" Margin="18,0" />
+                        <Border Height="1" Background="{StaticResource BorderBrushSubtle}" Margin="18,0" />
 
                         <Grid Margin="18,14">
                             <Grid.ColumnDefinitions>
@@ -105,10 +104,7 @@
                     </StackPanel>
                 </Border>
 
-                <Border Background="{StaticResource CardBackgroundBrush}"
-                        BorderBrush="{StaticResource BorderBrushSoft}"
-                        BorderThickness="1"
-                        CornerRadius="12"
+                <Border Style="{StaticResource CardBorderStyle}"
                         Padding="0">
                     <StackPanel>
                         <Grid Margin="18,14">
@@ -123,7 +119,7 @@
                             <CheckBox x:Name="SoundCheckBox" Grid.Column="1" Style="{StaticResource ToggleSwitchStyle}" VerticalAlignment="Center" />
                         </Grid>
 
-                        <Border Height="1" Background="{StaticResource BorderBrushSoft}" Margin="18,0" />
+                        <Border Height="1" Background="{StaticResource BorderBrushSubtle}" Margin="18,0" />
 
                         <Grid Margin="18,14">
                             <Grid.ColumnDefinitions>
@@ -141,7 +137,16 @@
             </StackPanel>
         </ScrollViewer>
 
-        <Border Grid.Row="3" Background="#EEF1F6" BorderBrush="{StaticResource BorderBrushSoft}" BorderThickness="0,1,0,0" Padding="22,10">
+        <Border Grid.Row="3"
+                BorderBrush="#E0E6EF"
+                BorderThickness="0,1,0,0"
+                Padding="22,10">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#F7F9FC" Offset="0" />
+                    <GradientStop Color="#EEF2F7" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="取消" IsCancel="True" MinWidth="96" Click="Cancel_Click" Margin="0,0,14,0" />
                 <Button Content="保存" IsDefault="True" MinWidth="96" Click="Save_Click" />
@@ -149,4 +154,5 @@
         </Border>
     </Grid>
     </Border>
+    </Grid>
 </Window>
