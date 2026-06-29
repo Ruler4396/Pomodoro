@@ -53,6 +53,11 @@ public partial class SettingsWindow : Window
         Close();
     }
 
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        Hide();
+    }
+
     private void Chrome_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
         if (e.ChangedButton == MouseButton.Left)

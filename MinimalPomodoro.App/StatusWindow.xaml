@@ -35,11 +35,21 @@
                     CornerRadius="18,18,0,0" />
 
             <Grid Grid.Row="0" Margin="16,0">
-                <Button x:Name="CloseButton"
-                        Style="{StaticResource MacCloseButtonStyle}"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Click="CloseButton_Click" />
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center">
+                    <Button x:Name="SettingsButton"
+                            Style="{StaticResource MacBlueButtonStyle}"
+                            Click="SettingsButton_Click" />
+                    <Button x:Name="MinimizeButton"
+                            Style="{StaticResource MacGreenButtonStyle}"
+                            Margin="8,0,0,0"
+                            Click="MinimizeButton_Click" />
+                    <Button x:Name="CloseButton"
+                            Style="{StaticResource MacCloseButtonStyle}"
+                            Margin="8,0,0,0"
+                            Click="CloseButton_Click" />
+                </StackPanel>
                 <TextBlock Text="番茄钟"
                            Style="{StaticResource TitleBarTextStyle}" />
             </Grid>
@@ -68,7 +78,7 @@
                     <RowDefinition Height="12" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="PhaseText" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" />
+                <TextBlock x:Name="PhaseText" FontSize="13" FontWeight="Medium" Foreground="{StaticResource AccentBrush}" />
                 <TextBlock x:Name="RemainingText" Grid.Row="1" FontSize="44" FontWeight="Light" Margin="0,0,0,0" Foreground="{StaticResource TextPrimaryBrush}" />
                 <TextBlock x:Name="CompletedText" Grid.Row="2" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,0" />
                 <Grid Grid.Row="4">
@@ -77,7 +87,7 @@
                         <ColumnDefinition Width="14" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="PrimaryButton" IsDefault="True" MinWidth="104" Click="PrimaryButton_Click" />
+                    <Button x:Name="PrimaryButton" IsDefault="True" Style="{StaticResource PrimaryActionButtonStyle}" MinWidth="104" Click="PrimaryButton_Click" />
                     <Button x:Name="TopmostButton" Grid.Column="2" Content="置顶" Click="TopmostButton_Click" />
                 </Grid>
             </Grid>

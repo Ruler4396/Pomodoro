@@ -6,8 +6,8 @@
         <SolidColorBrush x:Key="AppBackgroundBrush" Color="#F2F4F8" />
         <SolidColorBrush x:Key="CardBackgroundBrush" Color="#FFFFFF" />
         <SolidColorBrush x:Key="SubtleBackgroundBrush" Color="#F8F9FC" />
-        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#1F2328" />
-        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#5F6673" />
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#20242A" />
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#66707D" />
         <SolidColorBrush x:Key="BorderBrushSoft" Color="#DCE2EA" />
         <SolidColorBrush x:Key="BorderBrushSubtle" Color="#EEF1F5" />
         <SolidColorBrush x:Key="AccentBrush" Color="#E8402E" />
@@ -28,22 +28,24 @@
             <GradientStop Color="#F7F9FC" Offset="1" />
         </LinearGradientBrush>
         <LinearGradientBrush x:Key="PrimaryButtonBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#F15A47" Offset="0" />
-            <GradientStop Color="#E23D2B" Offset="1" />
+            <GradientStop Color="#F05A47" Offset="0" />
+            <GradientStop Color="#E24130" Offset="1" />
         </LinearGradientBrush>
         <LinearGradientBrush x:Key="PrimaryButtonHoverBrush" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#F36A59" Offset="0" />
-            <GradientStop Color="#D93224" Offset="1" />
+            <GradientStop Color="#F16B5C" Offset="0" />
+            <GradientStop Color="#D93D2E" Offset="1" />
         </LinearGradientBrush>
-        <SolidColorBrush x:Key="NeutralButtonBrush" Color="#F4F7FB" />
-        <SolidColorBrush x:Key="NeutralButtonHoverBrush" Color="#E9EEF5" />
+        <SolidColorBrush x:Key="NeutralButtonBrush" Color="#EEF2F7" />
+        <SolidColorBrush x:Key="NeutralButtonHoverBrush" Color="#E2E8F1" />
 
         <Style TargetType="Window">
-            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI, Microsoft YaHei UI" />
+            <Setter Property="FontFamily" Value="Segoe UI Variable Text, Segoe UI, Microsoft YaHei UI Light, Microsoft YaHei UI" />
             <Setter Property="Background" Value="{StaticResource AppBackgroundBrush}" />
             <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
             <Setter Property="UseLayoutRounding" Value="True" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+            <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
         </Style>
 
         <Style TargetType="Button">
@@ -86,24 +88,53 @@
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="Root" Property="Background" Value="#E8EDF4" />
                             </Trigger>
-                            <Trigger Property="IsDefault" Value="True">
-                                <Setter Property="Background" Value="{StaticResource PrimaryButtonBrush}" />
-                                <Setter Property="BorderBrush" Value="Transparent" />
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PrimaryActionButtonStyle" TargetType="Button">
+            <Setter Property="MinHeight" Value="36" />
+            <Setter Property="MinWidth" Value="96" />
+            <Setter Property="Padding" Value="18,0" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="#FFFFFF" />
+            <Setter Property="Background" Value="{StaticResource PrimaryButtonBrush}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Root"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0"
+                                CornerRadius="8"
+                                SnapsToDevicePixels="True">
+                            <Grid>
+                                <Border x:Name="InnerHighlight"
+                                        CornerRadius="7"
+                                        Background="#30FFFFFF"
+                                        Margin="1,1,1,18"
+                                        IsHitTestVisible="False" />
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="{StaticResource PrimaryButtonHoverBrush}" />
                                 <Setter Property="Foreground" Value="#FFFFFF" />
-                                <Setter Property="BorderThickness" Value="0" />
-                                <Setter TargetName="InnerHighlight" Property="Background" Value="#2FFFFFFF" />
+                                <Setter TargetName="InnerHighlight" Property="Background" Value="#3AFFFFFF" />
                             </Trigger>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="IsDefault" Value="True" />
-                                    <Condition Property="IsMouseOver" Value="True" />
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Background" Value="{StaticResource PrimaryButtonHoverBrush}" />
-                                <Setter Property="BorderBrush" Value="Transparent" />
-                                <Setter Property="BorderThickness" Value="0" />
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Root" Property="Background" Value="#D63B2B" />
                                 <Setter Property="Foreground" Value="#FFFFFF" />
-                                <Setter TargetName="InnerHighlight" Property="Background" Value="#30FFFFFF" />
-                            </MultiTrigger>
+                                <Setter TargetName="InnerHighlight" Property="Background" Value="#22FFFFFF" />
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -197,6 +228,82 @@
             </Setter>
         </Style>
 
+        <Style x:Key="MacBlueButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="14" />
+            <Setter Property="Height" Value="14" />
+            <Setter Property="MinWidth" Value="14" />
+            <Setter Property="MinHeight" Value="14" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="BorderBrush" Value="#2D89DE" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Ellipse Fill="#22000000" Margin="0,1,0,-1" />
+                            <Ellipse Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}">
+                                <Ellipse.Fill>
+                                    <RadialGradientBrush Center="0.35,0.25" GradientOrigin="0.3,0.2" RadiusX="0.85" RadiusY="0.9">
+                                        <GradientStop Color="#FF9ED4FF" Offset="0" />
+                                        <GradientStop Color="#FF4CA3F4" Offset="0.52" />
+                                        <GradientStop Color="#FF2779C8" Offset="1" />
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse IsHitTestVisible="False" Margin="3,2,3,7" Opacity="0.4" Fill="#AAFFFFFF" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#1F73BE" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.78" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MacGreenButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="14" />
+            <Setter Property="Height" Value="14" />
+            <Setter Property="MinWidth" Value="14" />
+            <Setter Property="MinHeight" Value="14" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="BorderBrush" Value="#24A94B" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Ellipse Fill="#22000000" Margin="0,1,0,-1" />
+                            <Ellipse Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}">
+                                <Ellipse.Fill>
+                                    <RadialGradientBrush Center="0.35,0.25" GradientOrigin="0.3,0.2" RadiusX="0.85" RadiusY="0.9">
+                                        <GradientStop Color="#FFA9F2B8" Offset="0" />
+                                        <GradientStop Color="#FF45CF6B" Offset="0.52" />
+                                        <GradientStop Color="#FF21A64B" Offset="1" />
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse IsHitTestVisible="False" Margin="3,2,3,7" Opacity="0.4" Fill="#AAFFFFFF" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#198D3B" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.78" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="WindowChromeBorderStyle" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource WindowSurfaceBrush}" />
             <Setter Property="BorderBrush" Value="#C9D0DB" />
@@ -209,7 +316,7 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="12" />
-            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="Foreground" Value="#656C78" />
         </Style>
 

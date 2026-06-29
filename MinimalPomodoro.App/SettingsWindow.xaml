@@ -40,17 +40,23 @@
                 CornerRadius="18,18,0,0" />
 
         <Grid Grid.Row="0" Margin="16,0" Height="34">
-            <Button x:Name="CloseButton"
-                    Style="{StaticResource MacCloseButtonStyle}"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Click="CloseButton_Click" />
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+                <Button x:Name="MinimizeButton"
+                        Style="{StaticResource MacGreenButtonStyle}"
+                        Click="MinimizeButton_Click" />
+                <Button x:Name="CloseButton"
+                        Style="{StaticResource MacCloseButtonStyle}"
+                        Margin="8,0,0,0"
+                        Click="CloseButton_Click" />
+            </StackPanel>
             <TextBlock Text="设置"
                        Style="{StaticResource TitleBarTextStyle}" />
         </Grid>
 
         <StackPanel Grid.Row="1" Margin="26,8,26,12">
-            <TextBlock Text="番茄钟" FontSize="25" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" />
+            <TextBlock Text="番茄钟" FontSize="25" FontWeight="Medium" Foreground="{StaticResource TextPrimaryBrush}" />
             <TextBlock x:Name="TodayCountText" Margin="0,6,0,0" FontSize="13" Foreground="{StaticResource TextSecondaryBrush}" />
         </StackPanel>
 
@@ -73,7 +79,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <StackPanel>
-                                <TextBlock Text="专注时长" FontSize="14" FontWeight="SemiBold" />
+                                <TextBlock Text="专注时长" FontSize="14" FontWeight="Medium" />
                                 <TextBlock Text="每个番茄的默认持续时间" Margin="0,4,0,0" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" />
                             </StackPanel>
                             <DockPanel Grid.Column="1" VerticalAlignment="Center">
@@ -90,7 +96,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <StackPanel>
-                                <TextBlock Text="短休息" FontSize="14" FontWeight="SemiBold" />
+                                <TextBlock Text="短休息" FontSize="14" FontWeight="Medium" />
                                 <TextBlock Text="专注结束后的普通休息时长" Margin="0,4,0,0" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" />
                             </StackPanel>
                             <DockPanel Grid.Column="1" VerticalAlignment="Center">
@@ -107,7 +113,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <StackPanel>
-                                <TextBlock Text="长休息" FontSize="14" FontWeight="SemiBold" />
+                                <TextBlock Text="长休息" FontSize="14" FontWeight="Medium" />
                                 <TextBlock Text="完成几轮后进入更长的休息" Margin="0,4,0,0" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" />
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
@@ -138,7 +144,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <StackPanel>
-                                <TextBlock Text="通知声音" FontSize="14" FontWeight="SemiBold" />
+                                <TextBlock Text="通知声音" FontSize="14" FontWeight="Medium" />
                                 <TextBlock Text="番茄或休息结束时播放系统提示音" Margin="0,4,0,0" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" />
                             </StackPanel>
                             <CheckBox x:Name="SoundCheckBox" Grid.Column="1" Style="{StaticResource ToggleSwitchStyle}" VerticalAlignment="Center" />
@@ -152,7 +158,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <StackPanel>
-                                <TextBlock Text="开机自启" FontSize="14" FontWeight="SemiBold" />
+                                <TextBlock Text="开机自启" FontSize="14" FontWeight="Medium" />
                                 <TextBlock Text="登录 Windows 后自动常驻托盘" Margin="0,4,0,0" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" />
                             </StackPanel>
                             <CheckBox x:Name="StartupCheckBox" Grid.Column="1" Style="{StaticResource ToggleSwitchStyle}" VerticalAlignment="Center" />
@@ -175,7 +181,7 @@
             </Border.Background>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="取消" IsCancel="True" MinWidth="96" Click="Cancel_Click" Margin="0,0,14,0" />
-                <Button Content="保存" IsDefault="True" MinWidth="96" Click="Save_Click" />
+                <Button Content="保存" IsDefault="True" Style="{StaticResource PrimaryActionButtonStyle}" MinWidth="96" Click="Save_Click" />
             </StackPanel>
         </Border>
     </Grid>

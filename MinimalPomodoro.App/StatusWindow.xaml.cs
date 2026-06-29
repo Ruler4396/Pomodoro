@@ -58,6 +58,16 @@ public partial class StatusWindow : Window
         Refresh();
     }
 
+    private void SettingsButton_Click(object sender, RoutedEventArgs e)
+    {
+        _controller.ShowSettings();
+    }
+
+    private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+    {
+        Hide();
+    }
+
     private void CloseButton_Click(object sender, RoutedEventArgs e)
     {
         Hide();

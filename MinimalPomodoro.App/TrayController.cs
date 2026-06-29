@@ -1,5 +1,6 @@
 using System.IO;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using MinimalPomodoro.Core;
 
@@ -54,30 +55,52 @@ public sealed class TrayController : IDisposable
 
     private ContextMenuStrip BuildMenu(TimerSnapshot snapshot)
     {
-        var menu = new ContextMenuStrip();
+        var menu = new ContextMenuStrip
+        {
+            BackColor = Color.FromArgb(250, 251, 253),
+            ForeColor = Color.FromArgb(32, 36, 42),
+            Font = new Font("Segoe UI Variable Text", 9F, FontStyle.Regular, GraphicsUnit.Point),
+            Padding = new Padding(6, 7, 6, 7),
+            ShowImageMargin = false,
+            RenderMode = ToolStripRenderMode.Professional,
+            Renderer = new MacLikeToolStripRenderer()
+        };
         if (snapshot.Phase == TimerPhase.Idle)
         {
             if (snapshot.LastCompletedPhase == TimerPhase.Focus)
             {
-                menu.Items.Add("开始休息", null, (_, _) => _controller.StartBreakAfterCompletedFocus());
+                AddMenuItem(menu, "开始休息", (_, _) => _controller.StartBreakAfterCompletedFocus(), true);
             }
             else
             {
-                menu.Items.Add("开始专注", null, (_, _) => _controller.StartFocus());
+                AddMenuItem(menu, "开始专注", (_, _) => _controller.StartFocus(), true);
             }
         }
         else
         {
-            menu.Items.Add(snapshot.IsPaused ? "继续" : "暂停", null, (_, _) => _controller.PauseOrResume());
-            menu.Items.Add("结束当前计时", null, (_, _) => _controller.EndCurrentPeriod());
-            menu.Items.Add("打开状态", null, (_, _) => _controller.ShowStatus());
+            AddMenuItem(menu, snapshot.IsPaused ? "继续" : "暂停", (_, _) => _controller.PauseOrResume(), true);
+            AddMenuItem(menu, "结束当前计时", (_, _) => _controller.EndCurrentPeriod());
+            AddMenuItem(menu, "打开状态", (_, _) => _controller.ShowStatus());
         }
 
         menu.Items.Add(new ToolStripSeparator());
-        menu.Items.Add("设置...", null, (_, _) => _controller.ShowSettings());
+        AddMenuItem(menu, "设置...", (_, _) => _controller.ShowSettings());
         menu.Items.Add(new ToolStripSeparator());
-        menu.Items.Add("退出", null, (_, _) => _controller.Exit());
+        AddMenuItem(menu, "退出", (_, _) => _controller.Exit());
         return menu;
+    }
+
+    private static void AddMenuItem(ContextMenuStrip menu, string text, EventHandler onClick, bool isPrimary = false)
+    {
+        var item = new ToolStripMenuItem(text, null, onClick)
+        {
+            AutoSize = false,
+            Size = new Size(156, 32),
+            Padding = new Padding(12, 0, 12, 0),
+            Margin = new Padding(0, 1, 0, 1),
+            Tag = isPrimary
+        };
+        menu.Items.Add(item);
     }
 
     private static string BuildTooltip(TimerSnapshot snapshot)
@@ -106,5 +129,68 @@ public sealed class TrayController : IDisposable
     {
         var iconPath = Path.Combine(AppContext.BaseDirectory, "Assets", "tray.ico");
         return File.Exists(iconPath) ? new Icon(iconPath) : SystemIcons.Application;
+    }
+
+    private sealed class MacLikeToolStripRenderer : ToolStripProfessionalRenderer
+    {
+        private static readonly Color MenuBack = Color.FromArgb(250, 251, 253);
+        private static readonly Color HoverBack = Color.FromArgb(235, 240, 247);
+        private static readonly Color PrimaryHoverBack = Color.FromArgb(232, 64, 46);
+        private static readonly Color TextColor = Color.FromArgb(32, 36, 42);
+        private static readonly Color SeparatorColor = Color.FromArgb(226, 231, 238);
+
+        public MacLikeToolStripRenderer() : base(new ProfessionalColorTable())
+        {
+        }
+
+        protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            using var brush = new SolidBrush(MenuBack);
+            e.Graphics.FillRectangle(brush, e.AffectedBounds);
+        }
+
+        protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+        {
+            if (e.Item is not ToolStripMenuItem item || !item.Selected)
+            {
+                return;
+            }
+
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            var isPrimary = item.Tag is true;
+            using var brush = new SolidBrush(isPrimary ? PrimaryHoverBack : HoverBack);
+            var rect = new Rectangle(5, 2, item.Width - 10, item.Height - 4);
+            using var path = RoundedRectangle(rect, 7);
+            e.Graphics.FillPath(brush, path);
+        }
+
+        protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
+        {
+            var isPrimaryHover = e.Item is ToolStripMenuItem { Selected: true, Tag: true };
+            e.TextColor = isPrimaryHover ? Color.White : TextColor;
+            e.TextFont = new Font("Segoe UI Variable Text", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            e.TextRectangle = new Rectangle(e.TextRectangle.Left + 4, e.TextRectangle.Top, e.TextRectangle.Width, e.TextRectangle.Height);
+            base.OnRenderItemText(e);
+        }
+
+        protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
+        {
+            using var pen = new Pen(SeparatorColor);
+            var y = e.Item.Height / 2;
+            e.Graphics.DrawLine(pen, 10, y, e.Item.Width - 10, y);
+        }
+
+        private static GraphicsPath RoundedRectangle(Rectangle bounds, int radius)
+        {
+            var diameter = radius * 2;
+            var path = new GraphicsPath();
+            path.AddArc(bounds.Left, bounds.Top, diameter, diameter, 180, 90);
+            path.AddArc(bounds.Right - diameter, bounds.Top, diameter, diameter, 270, 90);
+            path.AddArc(bounds.Right - diameter, bounds.Bottom - diameter, diameter, diameter, 0, 90);
+            path.AddArc(bounds.Left, bounds.Bottom - diameter, diameter, diameter, 90, 90);
+            path.CloseFigure();
+            return path;
+        }
     }
 }
